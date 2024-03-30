@@ -6,20 +6,18 @@
 #define PROGRAM_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "State.h"
 
-class Program {
+class Program : public State{
 
-    sf::RenderWindow m_window;
 
-    void Update();
-    void HandleEvents();
-    void HandleKeyboardInput(sf::Keyboard::Key key);
-    void Render();
+
+    void Update() override;
+    void Render() override;
 
 public:
-    Program();
+    Program(StateMachine* p_sm, sf::RenderWindow* p_rw);
     ~Program();
-    void Run();
 
 
 };
