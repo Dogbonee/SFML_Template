@@ -4,7 +4,7 @@
 
 #include "Program.h"
 
-Program::Program() : m_window(sf::VideoMode(800, 600), "Default Name")
+Program::Program(StateMachine* p_sm, sf::RenderWindow* p_rw) : State(p_sm, p_rw)
 {
 }
 
@@ -16,42 +16,9 @@ void Program::Update()
     Render();
 }
 
-void Program::HandleEvents()
-{
-    for(sf::Event event{}; m_window.pollEvent(event);)
-    {
-        switch(event.type)
-        {
-            case sf::Event::Closed:
-                m_window.close();
-                break;
-            case sf::Event::KeyPressed:
-                HandleKeyboardInput(event.key.code);
-                break;
-
-        }
-    }
-}
-
-void Program::HandleKeyboardInput(sf::Keyboard::Key key)
-{
-    switch(key)
-    {
-        default:
-            std::cout << "Key pressed: " << key << '\n';
-    }
-}
 
 void Program::Render()
 {
-    m_window.clear();
-    m_window.display();
-}
-
-void Program::Run()
-{
-    while(m_window.isOpen())
-    {
-        Update();
-    }
+    p_window->clear();
+    p_window->display();
 }
