@@ -14,10 +14,7 @@ StateMachine::StateMachine() : m_window(sf::VideoMode(800, 600), "Default Name")
 
 StateMachine::~StateMachine()
 {
-    for(auto* state : m_states)
-    {
-        delete state;
-    }
+
 }
 
 void StateMachine::UpdateCurrentState()

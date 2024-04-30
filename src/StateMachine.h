@@ -4,6 +4,7 @@
 
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
+#include <memory>
 #include <vector>
 #include "State.h"
 
@@ -17,8 +18,8 @@ class StateMachine {
 
     sf::RenderWindow m_window;
 
-    std::vector<State*> m_states;
-    State* p_currentState = nullptr;
+    std::vector<std::shared_ptr<State>> m_states;
+    std::shared_ptr<State> p_currentState = nullptr;
 
 
     void UpdateCurrentState();
