@@ -4,8 +4,8 @@ project(SFML_Template)
 set(SFML_DIR)
 set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_FILES src/main.cpp
-        src/Program.cpp
-        src/Program.h
+        src/DefaultState.cpp
+        src/DefaultState.h
         src/StateMachine.cpp
         src/StateMachine.h
         src/State.cpp
