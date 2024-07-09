@@ -23,12 +23,15 @@ protected:
     virtual void HandleKeyboardInput(sf::Keyboard::Key key);
     virtual void Render() = 0;
 
+
 public:
-    virtual ~State() = default;
 
     State(StateMachine* p_sm, sf::RenderWindow* p_rw);
-    virtual void Update() = 0;
+    virtual ~State() = default;
 
+    virtual void Update(float dt) = 0;
+    virtual void Start() = 0;
+    virtual void Exit() = 0;
 };
 
 

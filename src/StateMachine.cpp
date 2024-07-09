@@ -4,29 +4,32 @@
 
 #include "StateMachine.h"
 
-#include "Program.h"
+#include "DefaultState.h"
 
 
 StateMachine::StateMachine() : m_window(sf::VideoMode(800, 600), "Default Name")
 {
-    m_states.emplace_back(new Program(this, &m_window));
+    m_states.emplace_back(std::make_shared<DefaultState>(this, &m_window));
 }
 
-StateMachine::~StateMachine()
-{
-
-}
+StateMachine::~StateMachine() = default;
 
 void StateMachine::UpdateCurrentState()
 {
-    p_currentState->Update();
+    p_currentState->Update(m_dt);
 }
 
 void StateMachine::ChangeState(STATES state)
 {
     try
     {
-        p_currentState = m_states.at(state);
+        auto newState = m_states.at(state);
+        if(p_currentState)
+        {
+            p_currentState->Exit();
+        }
+        p_currentState = newState;
+        p_currentState->Start();
     }catch (std::exception& e)
     {
         std::cout << "State does not exist\n";
@@ -43,6 +46,7 @@ void StateMachine::StartStateMachine()
     }
     while(m_window.isOpen())
     {
+        m_dt = m_clock.restart().asSeconds();
         UpdateCurrentState();
     }
 }

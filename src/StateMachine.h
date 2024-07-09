@@ -21,6 +21,8 @@ class StateMachine {
     std::vector<std::shared_ptr<State>> m_states;
     std::shared_ptr<State> p_currentState = nullptr;
 
+    sf::Clock m_clock;
+    float m_dt;
 
     void UpdateCurrentState();
 
